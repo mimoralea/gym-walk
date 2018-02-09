@@ -1,50 +1,34 @@
-import gym
+import sys
 import numpy as np
 from gym import error, spaces
+from gym.envs.toy_text import discrete
 from gym.utils import seeding
 
-class WalkEnv(gym.Env):
+LEFT, RIGHT = 0, 1
 
-    def __init__(self, p_dist, r_dist):
-        if len(p_dist) != len(r_dist):
-            raise ValueError("Probability and Reward distribution must be the same length")
 
-        if min(p_dist) < 0 or max(p_dist) > 1:
-            raise ValueError("All probabilities must be between 0 and 1")
+class WalkEnv(discrete.DiscreteEnv):
 
-        for reward in r_dist:
-            if isinstance(reward, list) and reward[1] <= 0:
-                raise ValueError("Standard deviation in rewards must all be greater than 0")
+    def __init__(self):
 
-        self.p_dist = p_dist
-        self.r_dist = r_dist
+        self.shape = (1, 5)
+        self.start_state_index = self.shape[1]//2
 
-        self.n_bandits = len(p_dist)
-        self.action_space = spaces.Discrete(self.n_bandits)
-        self.observation_space = spaces.Discrete(1)
+        nS = np.prod(self.shape)
+        nA = 2
 
-        self._seed()
+        P = {}
+        for s in range(nS):
+            P[s] = {}
+            for a in range(nA):
+                prob = 1.0
+                new_state = np.clip(s - 1 if a == LEFT else s + 1, 0, nS - 1)
+                new_state = s if s == 0 or s == nS - 1 else new_state
+                reward = 1.0 if new_state == nS - 1 else 0.0
+                is_terminal = new_state == 0 or new_state == nS - 1
+                P[s][a] = (prob, new_state, reward, is_terminal)
 
-    def _seed(self, seed=None):
-        self.np_random, seed = seeding.np_random(seed)
-        return [seed]
+        isd = np.zeros(nS)
+        isd[self.start_state_index] = 1.0
 
-    def _step(self, action):
-        assert self.action_space.contains(action)
-
-        reward = 0
-        done = True
-
-        if np.random.uniform() < self.p_dist[action]:
-            if not isinstance(self.r_dist[action], list):
-                reward = self.r_dist[action]
-            else:
-                reward = np.random.normal(self.r_dist[action][0], self.r_dist[action][1])
-
-        return 0, reward, done, {}
-
-    def _reset(self):
-        return 0
-
-    def _render(self, mode='human', close=False):
-        pass
+        super(WalkEnv, self).__init__(nS, nA, P, isd)
