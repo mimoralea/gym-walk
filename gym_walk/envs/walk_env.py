@@ -11,6 +11,9 @@ MAPS = {
     5: [
         "ABCDE"
     ],
+    7: [
+        "ABCDEFG"
+    ],
     21: [
         "ABCDEFGHIJKLMNOPQRSTU"
     ]
