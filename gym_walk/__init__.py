@@ -9,6 +9,14 @@ register(
     nondeterministic=True,
 )
 register(
+    id='WalkSevenStates-v0',
+    entry_point='gym_walk.envs:WalkEnv',
+    kwargs={'n_states': 7},
+    timestep_limit=100,
+    reward_threshold=1.0,
+    nondeterministic=True,
+)
+register(
     id='WalkTwentyOneStates-v0',
     entry_point='gym_walk.envs:WalkEnv',
     kwargs={'n_states': 21},
