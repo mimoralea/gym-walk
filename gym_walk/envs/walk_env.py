@@ -11,6 +11,9 @@ MAPS = {
     5: [
         "ABCDE"
     ],
+    7: [
+        "ABCDEFG"
+    ],
     21: [
         "ABCDEFGHIJKLMNOPQRSTU"
     ]
@@ -45,7 +48,7 @@ class WalkEnv(discrete.DiscreteEnv):
 
         discrete.DiscreteEnv.__init__(self, nS, nA, P, isd)
 
-    def _render(self, mode='human', close=False):
+    def render(self, mode='human', close=False):
         outfile = StringIO() if mode == 'ansi' else sys.stdout
         desc = np.asarray(MAPS[self.shape[1]], dtype='c').tolist()
         desc = [[c.decode('utf-8') for c in line] for line in desc]
