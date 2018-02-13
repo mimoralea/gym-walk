@@ -1,24 +1,12 @@
 import sys
 import numpy as np
 from six import StringIO, b
+from string import ascii_uppercase
 
 from gym import utils
 from gym.envs.toy_text import discrete
 
 LEFT, RIGHT = 0, 1
-
-MAPS = {
-    5: [
-        "ABCDE"
-    ],
-    7: [
-        "ABCDEFG"
-    ],
-    21: [
-        "ABCDEFGHIJKLMNOPQRSTU"
-    ]
-}
-
 
 class WalkEnv(discrete.DiscreteEnv):
 
@@ -50,7 +38,7 @@ class WalkEnv(discrete.DiscreteEnv):
 
     def render(self, mode='human', close=False):
         outfile = StringIO() if mode == 'ansi' else sys.stdout
-        desc = np.asarray(MAPS[self.shape[1]], dtype='c').tolist()
+        desc = np.asarray(ascii_uppercase[:self.shape[1]], dtype='c').tolist()
         desc = [[c.decode('utf-8') for c in line] for line in desc]
         color = 'red' if self.s == 0 else 'green' if self.s == self.nS - 1 else 'yellow'
         desc[0][self.s] = utils.colorize(desc[0][self.s], color, highlight=True)
