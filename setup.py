@@ -7,7 +7,7 @@ setup(
     url='https://github.com/rldm/gym-walk',
     author='Miguel Morales',
     author_email='mimoralea@gmail.com',
-    packages=['gym_walk'],
+    packages=['gym_walk', 'gym_walk.envs'],
     license='MIT License',
     install_requires=['gym'],
 )
