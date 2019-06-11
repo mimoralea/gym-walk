@@ -1,7 +1,7 @@
 from gym.envs.registration import register
 
 register(
-    id='WalkFiveStates-v0',
+    id='WalkFive-v0',
     entry_point='gym_walk.envs:WalkEnv',
     kwargs={'n_states': 5},
     max_episode_steps=100,
@@ -9,7 +9,7 @@ register(
     nondeterministic=True,
 )
 register(
-    id='WalkSevenStates-v0',
+    id='WalkSeven-v0',
     entry_point='gym_walk.envs:WalkEnv',
     kwargs={'n_states': 7},
     max_episode_steps=100,
@@ -17,7 +17,7 @@ register(
     nondeterministic=True,
 )
 register(
-    id='WalkTwentyOneStates-v0',
+    id='WalkTwentyOne-v0',
     entry_point='gym_walk.envs:WalkEnv',
     kwargs={'n_states': 21},
     max_episode_steps=1000,
