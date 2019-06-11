@@ -4,7 +4,7 @@ setup(
     name='gym_walk',
     version='0.0.1',
     description='Gym walk environment - useful to replicate Random Walk experiments',
-    url='https://github.com/rldm/gym-walk',
+    url='https://github.com/mimoralea/gym-walk',
     author='Miguel Morales',
     author_email='mimoralea@gmail.com',
     packages=['gym_walk', 'gym_walk.envs'],
