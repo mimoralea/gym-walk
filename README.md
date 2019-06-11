@@ -5,7 +5,7 @@
 Dependencies: openai-gym
 
 ```bash
-git clone https://github.com/rldm/gym-walk.git
+git clone https://github.com/mimoralea/gym-walk.git
 cd gym-walk
 pip install .
 ```
