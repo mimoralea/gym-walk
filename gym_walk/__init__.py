@@ -17,6 +17,22 @@ register(
     nondeterministic=True,
 )
 register(
+    id='WalkNine-v0',
+    entry_point='gym_walk.envs:WalkEnv',
+    kwargs={'n_states': 9},
+    max_episode_steps=100,
+    reward_threshold=1.0,
+    nondeterministic=True,
+)
+register(
+    id='WalkFifthteen-v0',
+    entry_point='gym_walk.envs:WalkEnv',
+    kwargs={'n_states': 15},
+    max_episode_steps=100,
+    reward_threshold=1.0,
+    nondeterministic=True,
+)
+register(
     id='WalkTwentyOne-v0',
     entry_point='gym_walk.envs:WalkEnv',
     kwargs={'n_states': 21},
