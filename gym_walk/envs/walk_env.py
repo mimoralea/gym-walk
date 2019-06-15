@@ -14,7 +14,8 @@ class WalkEnv(discrete.DiscreteEnv):
 
     def __init__(self, n_states=7, p_stay=0.0, p_backward=0.5):
 
-        self.shape = (1, n_states)
+        # two terminal states added
+        self.shape = (1, n_states + 2)
         self.start_state_index = self.shape[1]//2
 
         self.nS = nS = np.prod(self.shape)
