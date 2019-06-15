@@ -52,6 +52,28 @@ register(
     id='BanditWalk-v0',
     entry_point='gym_walk.envs:WalkEnv',
     # left-most and right-most states are terminal
+    kwargs={'n_states': 1, 'p_stay': 0.0, 'p_backward': 0.0},
+    max_episode_steps=100,
+    reward_threshold=1.0,
+    nondeterministic=True,
+)
+register(
+    # One non-terminal states and two terminal
+    # Technically speaking, this is a bandit MDP
+    id='BanditDeterministicWalk-v0',
+    entry_point='gym_walk.envs:WalkEnv',
+    # left-most and right-most states are terminal
+    kwargs={'n_states': 1, 'p_stay': 0.0, 'p_backward': 0.0},
+    max_episode_steps=100,
+    reward_threshold=1.0,
+    nondeterministic=True,
+)
+register(
+    # One non-terminal states and two terminal
+    # Technically speaking, this is a bandit MDP
+    id='BanditNoisyWalk-v0',
+    entry_point='gym_walk.envs:WalkEnv',
+    # left-most and right-most states are terminal
     kwargs={'n_states': 1, 'p_stay': 0.0, 'p_backward': 0.2},
     max_episode_steps=100,
     reward_threshold=1.0,
