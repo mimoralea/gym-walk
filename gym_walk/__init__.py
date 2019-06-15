@@ -1,14 +1,14 @@
 from gym.envs.registration import register
 
 
-# classic implementations
+# classics
 register(
     # five non-terminal states and two terminal
     # same as below
     id='RandomWalk-v0',
     entry_point='gym_walk.envs:WalkEnv',
     # left-most and right-most states are terminal
-    kwargs={'n_states': 7, 'p_stay': 0.0, 'p_backward': 0.5},
+    kwargs={'n_states': 5, 'p_stay': 0.0, 'p_backward': 0.5},
     max_episode_steps=100,
     reward_threshold=1.0,
     nondeterministic=True,
