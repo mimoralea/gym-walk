@@ -12,7 +12,7 @@ class WalkEnv(discrete.DiscreteEnv):
 
     metadata = {'render.modes': ['human', 'ansi']}
 
-    def __init__(self, n_states=5, noise=0.0):
+    def __init__(self, n_states=7, p_stay=0.0, p_backward=0.5):
 
         self.shape = (1, n_states)
         self.start_state_index = self.shape[1]//2
@@ -24,9 +24,7 @@ class WalkEnv(discrete.DiscreteEnv):
         for s in range(nS):
             P[s] = {}
             for a in range(nA):
-                p_forward = 1.0 - noise
-                p_stay = noise * 2/3.
-                p_backward = noise * 1/3.
+                p_forward = 1.0 - p_stay - p_backward
 
                 s_forward = np.clip(s - 1 if a == LEFT else s + 1, 0, nS - 1) if s != 0 and s != nS - 1 else s
                 s_backward = np.clip(s + 1 if a == LEFT else s - 1, 0, nS - 1) if s != 0 and s != nS - 1 else s
