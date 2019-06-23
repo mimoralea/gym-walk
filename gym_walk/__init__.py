@@ -71,7 +71,7 @@ register(
 register(
     # One non-terminal states and two terminal
     # Technically speaking, this is a bandit MDP
-    id='BanditNoisyWalk-v0',
+    id='BanditSlipperyWalk-v0',
     entry_point='gym_walk.envs:WalkEnv',
     # left-most and right-most states are terminal
     kwargs={'n_states': 1, 'p_stay': 0.0, 'p_backward': 0.2},
@@ -138,7 +138,7 @@ register(
 
 # stochastic transition walks
 register(
-    id='NoisyWalkThree-v0',
+    id='SlipperyWalkThree-v0',
     entry_point='gym_walk.envs:WalkEnv',
     # left-most and right-most states are terminal
     kwargs={'n_states': 3, 'p_stay': 0.5*2/3., 'p_backward': 0.5*1/3.},
@@ -147,7 +147,7 @@ register(
     nondeterministic=True,
 )
 register(
-    id='NoisyWalkFive-v0',
+    id='SlipperyWalkFive-v0',
     entry_point='gym_walk.envs:WalkEnv',
     # left-most and right-most states are terminal
     kwargs={'n_states': 5, 'p_stay': 0.5*2/3., 'p_backward': 0.5*1/3.},
@@ -156,7 +156,7 @@ register(
     nondeterministic=True,
 )
 register(
-    id='NoisyWalkSeven-v0',
+    id='SlipperyWalkSeven-v0',
     entry_point='gym_walk.envs:WalkEnv',
     # left-most and right-most states are terminal
     kwargs={'n_states': 7, 'p_stay': 0.5*2/3., 'p_backward': 0.5*1/3.},
@@ -165,7 +165,7 @@ register(
     nondeterministic=True,
 )
 register(
-    id='NoisyWalkFifthteen-v0',
+    id='SlipperyWalkFifthteen-v0',
     entry_point='gym_walk.envs:WalkEnv',
     # left-most and right-most states are terminal
     kwargs={'n_states': 15, 'p_stay': 0.5*2/3., 'p_backward': 0.5*1/3.},
@@ -174,7 +174,7 @@ register(
     nondeterministic=True,
 )
 register(
-    id='NoisyWalkSeventeen-v0',
+    id='SlipperyWalkSeventeen-v0',
     entry_point='gym_walk.envs:WalkEnv',
     # left-most and right-most states are terminal
     kwargs={'n_states': 17, 'p_stay': 0.5*2/3., 'p_backward': 0.5*1/3.},
@@ -183,7 +183,7 @@ register(
     nondeterministic=True,
 )
 register(
-    id='NoisyWalkNineteen-v0',
+    id='SlipperyWalkNineteen-v0',
     entry_point='gym_walk.envs:WalkEnv',
     # left-most and right-most states are terminal
     kwargs={'n_states': 19, 'p_stay': 0.5*2/3., 'p_backward': 0.5*1/3.},

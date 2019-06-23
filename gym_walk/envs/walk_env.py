@@ -1,12 +1,13 @@
 import sys
 import numpy as np
-from six import StringIO, b
+from six import StringIO
 from string import ascii_uppercase
 
 from gym import utils
 from gym.envs.toy_text import discrete
 
-LEFT, RIGHT = 0, 1
+WEST, EAST = 0, 1
+
 
 class WalkEnv(discrete.DiscreteEnv):
 
@@ -27,8 +28,8 @@ class WalkEnv(discrete.DiscreteEnv):
             for a in range(nA):
                 p_forward = 1.0 - p_stay - p_backward
 
-                s_forward = np.clip(s - 1 if a == LEFT else s + 1, 0, nS - 1) if s != 0 and s != nS - 1 else s
-                s_backward = np.clip(s + 1 if a == LEFT else s - 1, 0, nS - 1) if s != 0 and s != nS - 1 else s
+                s_forward = np.clip(s - 1 if a == WEST else s + 1, 0, nS - 1) if s != 0 and s != nS - 1 else s
+                s_backward = np.clip(s + 1 if a == WEST else s - 1, 0, nS - 1) if s != 0 and s != nS - 1 else s
 
                 r_forward = 1.0 if s == nS - 2 and s_forward == nS - 1 else 0.0
                 r_backward = 1.0 if s == nS - 2 and s_backward == nS - 1 else 0.0
