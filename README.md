@@ -28,7 +28,7 @@ def td(pi, env, gamma=1.0, alpha=0.01, n_episodes=100000):
         while not done:
             action = pi(state)
             next_state, reward, done, _ = env.step(action)
-            td_target = reward + gamma * V[next_state]
+            td_target = reward + gamma * V[next_state] * (not done)
             td_error = td_target - V[state]
             V[state] = V[state] + alpha * td_error
             state = next_state
