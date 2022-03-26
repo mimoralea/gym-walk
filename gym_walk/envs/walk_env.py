@@ -2,6 +2,7 @@ import sys
 import numpy as np
 from six import StringIO
 from string import ascii_uppercase
+from typing import Optional
 
 import gym
 from gym import spaces, utils
@@ -61,7 +62,14 @@ class WalkEnv(gym.Env):
         self.lastaction = action
         return (int(s), r, d, {"prob": p})
 
-    def reset(self):
+    def reset(
+        self,
+        *,
+        seed: Optional[int] = None,
+        return_info: bool = False,
+        options: Optional[dict] = None,
+    ):
+        super().reset(seed=seed)
         self.s = categorical_sample(self.isd, self.np_random)
         self.lastaction = None
         return int(self.s)
