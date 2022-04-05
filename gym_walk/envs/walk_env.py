@@ -2,14 +2,16 @@ import sys
 import numpy as np
 from six import StringIO
 from string import ascii_uppercase
+from typing import Optional
 
-from gym import utils
-from gym.envs.toy_text import discrete
+import gym
+from gym import spaces, utils
+from gym.envs.toy_text.utils import categorical_sample
 
 WEST, EAST = 0, 1
 
 
-class WalkEnv(discrete.DiscreteEnv):
+class WalkEnv(gym.Env):
 
     metadata = {'render.modes': ['human', 'ansi']}
 
@@ -17,14 +19,14 @@ class WalkEnv(discrete.DiscreteEnv):
 
         # two terminal states added
         self.shape = (1, n_states + 2)
-        self.start_state_index = self.shape[1]//2
+        self.start_state_index = self.shape[1] // 2
 
         self.nS = nS = np.prod(self.shape)
         self.nA = nA = 2
 
-        P = {}
+        self.P = {}
         for s in range(nS):
-            P[s] = {}
+            self.P[s] = {}
             for a in range(nA):
                 p_forward = 1.0 - p_stay - p_backward
 
@@ -37,15 +39,40 @@ class WalkEnv(discrete.DiscreteEnv):
                 d_forward = s >= nS - 2 and s_forward == nS - 1 or s <= 1 and s_forward == 0
                 d_backward = s >= nS - 2 and s_backward == nS - 1 or s <= 1 and s_backward == 0
 
-                P[s][a] = [
+                self.P[s][a] = [
                     (p_forward, s_forward, r_forward, d_forward),
                     (p_stay, s, 0.0, s == nS - 1 or s == 0),
                     (p_backward, s_backward, r_backward, d_backward)
                 ]
 
-        isd = np.zeros(nS)
-        isd[self.start_state_index] = 1.0
-        discrete.DiscreteEnv.__init__(self, nS, nA, P, isd)
+        self.isd = np.zeros(nS)
+        self.isd[self.start_state_index] = 1.0
+        self.lastaction = None # for rendering
+
+        self.action_space = spaces.Discrete(self.nA)
+        self.observation_space = spaces.Discrete(self.nS)
+
+        self.s = categorical_sample(self.isd, self.np_random)
+
+    def step(self, action):
+        transitions = self.P[self.s][action]
+        i = categorical_sample([t[0] for t in transitions], self.np_random)
+        p, s, r, d = transitions[i]
+        self.s = s
+        self.lastaction = action
+        return (int(s), r, d, {"prob": p})
+
+    def reset(
+        self,
+        *,
+        seed: Optional[int] = None,
+        return_info: bool = False,
+        options: Optional[dict] = None,
+    ):
+        super().reset(seed=seed)
+        self.s = categorical_sample(self.isd, self.np_random)
+        self.lastaction = None
+        return int(self.s)
 
     def render(self, mode='human', close=False):
         outfile = StringIO() if mode == 'ansi' else sys.stdout
