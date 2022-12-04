@@ -1,6 +1,6 @@
 import sys
 import numpy as np
-from six import StringIO
+from io import StringIO
 from string import ascii_uppercase
 from typing import Optional
 
