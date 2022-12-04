@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "gym_walk"
+version = "0.0.3"
+description = "Gym walk environment - useful to replicate Random Walk experiments"
+authors = ["Miguel Morales <mimoralea@gmail.com>"]
+license = "MIT License"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+numpy = "^1.23.5"
+gym = "0.23"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.2.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

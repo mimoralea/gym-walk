@@ -1,0 +1,4 @@
+name: base # this is mostly to help set up the devcontainer.
+dependencies:
+  - pip:
+    - poetry==1.2.2
