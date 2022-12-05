@@ -1,4 +1,0 @@
-name: base # Sets up the devcontainer, then use poetry to install other dependencies. Poetry helps us publish to PYPI.
-dependencies:
-  - pip:
-    - poetry==1.2.2
